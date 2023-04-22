@@ -4,6 +4,32 @@ use std::{
     process,
 };
 
+pub struct Scanner {
+    source: String,
+}
+
+impl Scanner {
+    pub fn new(source: String) -> Scanner {
+        Scanner { source }
+    }
+
+    pub fn scan_tokens(self) -> Vec<Token> {
+        vec![]
+    }
+}
+
+#[derive(Debug)]
+pub enum TokenKind {
+    Line,
+    BinaryOp,
+}
+
+#[derive(Debug)]
+pub struct Token {
+    value: String,
+    kind: TokenKind,
+}
+
 fn run(line: String) -> () {
     println!("you passed {}", line);
 }
