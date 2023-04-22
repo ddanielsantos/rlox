@@ -1,8 +1,30 @@
-use std::{env, process};
+use std::{
+    env,
+    io::{self, BufRead},
+    process,
+};
+
+fn run(line: String) -> () {
+    println!("you passed {}", line);
+}
 
 fn run_prompt() -> () {
-    println!("Showing some options");
-    ()
+    let stdin = io::stdin();
+    let mut input_lines = stdin.lock().lines();
+
+    loop {
+        print!("> ");
+
+        match input_lines.next() {
+            Some(Ok(line)) => {
+                run(line);
+            }
+            Some(Err(e)) => {
+                eprintln!("error while reading line: {}", e);
+            }
+            None => todo!(),
+        }
+    }
 }
 
 fn run_file(file: String) -> () {
