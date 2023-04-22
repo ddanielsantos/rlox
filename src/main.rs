@@ -1,5 +1,5 @@
 use std::{
-    env,
+    env, fs,
     io::{self, BufRead},
     process,
 };
@@ -44,8 +44,10 @@ fn run_prompt() -> () {
 }
 
 fn run_file(file: String) -> () {
-    println!("Sucessfully running");
-    ()
+    match fs::read_to_string(file) {
+        Ok(content) => run(content),
+        Err(e) => eprintln!("error while loading file: {}", e),
+    }
 }
 
 fn main() {
