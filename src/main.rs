@@ -16,6 +16,14 @@ fn run(line: String) -> () {
     println!("{:?}", tokens);
 }
 
+fn error(line: usize, message: String) -> () {
+    report(line, "", message)
+}
+
+fn report(line: usize, at: &str, message: String) {
+    println!("[line {}] Error {}: {}", line, at, message)
+}
+
 fn run_prompt() -> () {
     let stdin = io::stdin();
     let mut input_lines = stdin.lock().lines();
