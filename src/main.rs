@@ -4,34 +4,16 @@ use std::{
     process,
 };
 
-pub struct Scanner {
-    source: String,
-}
+mod scanner;
+mod token;
 
-impl Scanner {
-    pub fn new(source: String) -> Scanner {
-        Scanner { source }
-    }
-
-    pub fn scan_tokens(self) -> Vec<Token> {
-        vec![]
-    }
-}
-
-#[derive(Debug)]
-pub enum TokenKind {
-    Line,
-    BinaryOp,
-}
-
-#[derive(Debug)]
-pub struct Token {
-    value: String,
-    kind: TokenKind,
-}
+use crate::{scanner::Scanner, token::Token};
 
 fn run(line: String) -> () {
-    println!("you passed {}", line);
+    let scanner = Scanner::new(line);
+    let tokens: Vec<Token> = scanner.scan_tokens();
+
+    println!("{:?}", tokens);
 }
 
 fn run_prompt() -> () {
