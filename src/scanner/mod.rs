@@ -1,7 +1,11 @@
 use crate::token::Token;
 
 pub struct Scanner {
+    current: usize,
+    line: usize,
     source: String,
+    start: usize,
+    tokens: Vec<Token>,
 }
 
 impl Scanner {
