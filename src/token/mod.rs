@@ -48,4 +48,11 @@ pub enum TokenKind {
 pub struct Token {
     value: String,
     kind: TokenKind,
+    line: usize,
+}
+
+impl Token {
+    pub fn new(value: String, kind: TokenKind, line: usize) -> Token {
+        Token { value, kind, line }
+    }
 }
