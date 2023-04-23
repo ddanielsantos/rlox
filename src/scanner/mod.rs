@@ -9,6 +9,9 @@ pub struct Scanner {
 }
 
 impl Scanner {
+    fn is_at_end(self) -> bool {
+        self.current >= self.source.len()
+    }
     pub fn new(source: String) -> Scanner {
         Scanner { source }
     }
