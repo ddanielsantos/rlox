@@ -13,7 +13,13 @@ impl Scanner {
         self.current >= self.source.len()
     }
     pub fn new(source: String) -> Scanner {
-        Scanner { source }
+        Scanner {
+            source,
+            tokens: Vec::new(),
+            start: 0,
+            current: 0,
+            line: 1,
+        }
     }
 
     pub fn scan_tokens(self) -> Vec<Token> {
