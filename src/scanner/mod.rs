@@ -1,4 +1,4 @@
-use crate::token::Token;
+use crate::token::{Token, TokenKind};
 
 pub struct Scanner {
     current: usize,
@@ -12,6 +12,7 @@ impl Scanner {
     fn is_at_end(self) -> bool {
         self.current >= self.source.len()
     }
+
     pub fn new(source: String) -> Scanner {
         Scanner {
             source,
@@ -22,7 +23,17 @@ impl Scanner {
         }
     }
 
-    pub fn scan_tokens(self) -> Vec<Token> {
-        vec![]
+    fn scan_token(self) {}
+
+    pub fn scan_tokens(mut self) -> Vec<Token> {
+        while !self.is_at_end() {
+            self.start = self.current;
+            self.scan_token();
+        }
+
+        self.tokens
+            .push(Token::new("".to_string(), TokenKind::EOF, self.line));
+
+        self.tokens
     }
 }
