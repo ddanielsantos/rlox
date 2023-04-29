@@ -53,6 +53,22 @@ impl Scanner {
                 '+' => self.add_token(TokenKind::Plus),
                 ';' => self.add_token(TokenKind::Semicolon),
                 '*' => self.add_token(TokenKind::Star),
+                '!' => match self.match_char('=') {
+                    true => self.add_token(TokenKind::BangEqual),
+                    false => self.add_token(TokenKind::Bang),
+                },
+                '=' => match self.match_char('=') {
+                    true => self.add_token(TokenKind::EqualEqual),
+                    false => self.add_token(TokenKind::Equal),
+                },
+                '<' => match self.match_char('=') {
+                    true => self.add_token(TokenKind::LessEqual),
+                    false => self.add_token(TokenKind::Less),
+                },
+                '>' => match self.match_char('=') {
+                    true => self.add_token(TokenKind::GreaterEqual),
+                    false => self.add_token(TokenKind::Greater),
+                },
                 _ => todo!(),
             }
         }
@@ -70,7 +86,7 @@ impl Scanner {
         self.tokens.clone()
     }
 
-    fn match_char(mut self, expected: char) -> bool {
+    fn match_char(&mut self, expected: char) -> bool {
         if self.is_at_end() {
             return false;
         }
