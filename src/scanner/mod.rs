@@ -38,7 +38,25 @@ impl Scanner {
         }
     }
 
-    fn scan_token(self) {}
+    fn scan_token(&mut self) -> () {
+        let char = self.advance();
+
+        if let Some(c) = char {
+            match c {
+                '(' => self.add_token(TokenKind::LeftParen),
+                ')' => self.add_token(TokenKind::RightParen),
+                '{' => self.add_token(TokenKind::LeftBrace),
+                '}' => self.add_token(TokenKind::RightBrace),
+                ',' => self.add_token(TokenKind::Comma),
+                '.' => self.add_token(TokenKind::Dot),
+                '-' => self.add_token(TokenKind::Minus),
+                '+' => self.add_token(TokenKind::Plus),
+                ';' => self.add_token(TokenKind::Semicolon),
+                '*' => self.add_token(TokenKind::Star),
+                _ => todo!(),
+            }
+        }
+    }
 
     pub fn scan_tokens(&mut self) -> Vec<Token> {
         while !self.is_at_end() {
