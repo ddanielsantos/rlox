@@ -17,6 +17,14 @@ impl Scanner {
             .push(Token::new(substr.to_string(), kind, self.line));
     }
 
+    fn advance(&mut self) -> Option<char> {
+        self.current += 1;
+
+        let res = self.source.chars().nth(self.current - 1);
+
+        res
+    }
+
         self.current >= self.source.len()
     }
 
