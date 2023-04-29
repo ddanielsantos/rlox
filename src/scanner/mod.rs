@@ -9,7 +9,6 @@ pub struct Scanner {
 }
 
 impl Scanner {
-    fn is_at_end(self) -> bool {
     fn add_token(&mut self, kind: TokenKind) -> () {
         let substr = &self.source[self.start..self.current];
 
@@ -25,6 +24,7 @@ impl Scanner {
         res
     }
 
+    fn is_at_end(&self) -> bool {
         self.current >= self.source.len()
     }
 
