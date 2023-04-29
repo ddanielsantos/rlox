@@ -100,3 +100,47 @@ impl Scanner {
         true
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{Scanner, Token, TokenKind};
+
+    #[test]
+    fn ids_empty() {
+        let mut scanner = Scanner::new("".to_string());
+        let result = scanner.scan_tokens();
+
+        let expected: Vec<Token> = vec![Token::new("".to_string(), TokenKind::EOF, 1)];
+
+        assert_eq!(result, expected);
+        assert_eq!(result.len(), 1);
+    }
+
+    #[test]
+    fn ids_bang() {
+        let mut scanner = Scanner::new("!".to_string());
+        let result = scanner.scan_tokens();
+
+        let expected: Vec<Token> = vec![
+            Token::new("!".to_string(), TokenKind::Bang, 1),
+            Token::new("".to_string(), TokenKind::EOF, 1),
+        ];
+
+        assert_eq!(result, expected);
+        assert_eq!(result.len(), 2);
+    }
+
+    #[test]
+    fn ids_bang_equal() {
+        let mut scanner = Scanner::new("!=".to_string());
+        let result = scanner.scan_tokens();
+
+        let expected: Vec<Token> = vec![
+            Token::new("!=".to_string(), TokenKind::BangEqual, 1),
+            Token::new("".to_string(), TokenKind::EOF, 1),
+        ];
+
+        assert_eq!(result, expected);
+        assert_eq!(result.len(), 2);
+    }
+}
