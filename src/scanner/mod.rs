@@ -10,6 +10,13 @@ pub struct Scanner {
 
 impl Scanner {
     fn is_at_end(self) -> bool {
+    fn add_token(&mut self, kind: TokenKind) -> () {
+        let substr = &self.source[self.start..self.current];
+
+        self.tokens
+            .push(Token::new(substr.to_string(), kind, self.line));
+    }
+
         self.current >= self.source.len()
     }
 
