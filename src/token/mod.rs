@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum TokenKind {
     LeftParen,
     RightParen,
@@ -44,7 +44,7 @@ pub enum TokenKind {
     EOF,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Token {
     value: String,
     kind: TokenKind,
