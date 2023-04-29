@@ -10,7 +10,7 @@ mod token;
 use crate::{scanner::Scanner, token::Token};
 
 fn run(line: String) -> () {
-    let scanner = Scanner::new(line);
+    let mut scanner = Scanner::new(line);
     let tokens: Vec<Token> = scanner.scan_tokens();
 
     println!("{:?}", tokens);
@@ -75,7 +75,7 @@ impl RLOX {
             2 => {
                 self.run_file(args[1].clone());
             }
-            _ => run_prompt(),
+            _ => self.run_prompt(),
         }
     }
 }
